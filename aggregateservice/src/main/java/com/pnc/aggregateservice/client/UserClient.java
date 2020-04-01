@@ -21,6 +21,6 @@ public interface UserClient {
     @GetMapping(value = "/users/getById/{id}")
     ResponseEntity<ApiStatus> getUserById(@PathVariable long id);
 
-    @PostMapping
-    ResponseEntity<ApiStatus> saveUser(@RequestBody User user);
+    @PostMapping(value="/users/users")
+    ResponseEntity<ApiStatus> saveUsersById(List<User> user);
 }

@@ -53,7 +53,7 @@ public class AccountsController {
     }
 
     @PostMapping
-    private ResponseEntity<ApiStatus> savetAccounts(@RequestBody List<Account> account) {
+    private ResponseEntity<ApiStatus> saveAccounts(@RequestBody List<Account> account) {
         List<Account> savedAccounts = accountsService.save(account);
         ApiStatus apiStatus = new ApiStatus();
         apiStatus.setStatus("success");

@@ -25,6 +25,6 @@ public interface AccountClient {
     @PostMapping
     ResponseEntity<HttpStatus> saveAccountsById(@RequestBody List<Account> account);
 
-    @PostMapping
-    ResponseEntity<HttpStatus> savetAccounts(@RequestBody List<Account> accounts);
+    @PostMapping(value = "/accounts")
+    ResponseEntity<ApiStatus> saveAccounts(@RequestBody List<Account> accounts);
 }

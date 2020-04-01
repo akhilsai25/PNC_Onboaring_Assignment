@@ -26,7 +26,7 @@ public class UserDetailsService {
         ApiStatus apiStatus = userClient.getUsers().getBody();
         if(apiStatus.getStatus().equals("false"))
         {
-
+            return apiStatus;
         }
         List<User> users = apiStatus.getData().get("users");
         ApiStatusAccounts apiStatus2 = accountClient.getAccounts().getBody();
@@ -51,6 +51,10 @@ public class UserDetailsService {
 
     public ApiStatus getUserById(long id){
         ApiStatus apiStatus = userClient.getUserById(id).getBody();
+        if(apiStatus.getStatus().equals("false"))
+        {
+            return apiStatus;
+        }
         List<User> users = apiStatus.getData().get("user");
         ApiStatusAccounts apiStatus2 = accountClient.getAccountsByUserId(id).getBody();
         List<Account> accounts = apiStatus2.getData().get("account");
@@ -75,7 +79,13 @@ public class UserDetailsService {
     public void postUsersAndAccounts(User user) {
 
         List<Account> accounts = user.getAccountList();
-        userClient.saveUser(user);
-        accountClient.saveAccountsById(accounts);
+        List<User> userlist = new ArrayList<>();
+        userlist.add(user);
+        ApiStatus apiStatus = userClient.saveUsersById(userlist).getBody();
+        accounts.stream().forEach(p->{
+            List<User> u = apiStatus.getData().get("users");
+            p.setUserid(u.get(0).getId());
+        });
+        accountClient.saveAccounts(accounts);
     }
 }

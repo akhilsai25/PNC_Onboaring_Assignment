@@ -40,7 +40,7 @@ public class UsersController {
 
         Optional<User> user = usersService.getUserById(id);
         if(!user.isPresent())
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"record not found for the given ID");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"record not found for the given ID:"+id);
         ApiStatus apiStatus = new ApiStatus();
         apiStatus.setStatus("success");
         HashMap<String,Object> map = new HashMap();

@@ -12,11 +12,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(name="FIRST_NAME")
     private String first_name;
+
     private String last_name;
     private long ssn;
     private String address;
     private long phone;
+
+    public User() {
+    }
 
     public User(String first_name, String last_name) {
         this.first_name = first_name;
